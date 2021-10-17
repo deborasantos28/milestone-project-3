@@ -26,7 +26,7 @@
         <ul class="right hide-on-med-and-down">
           <li><a href="{{ url_for('get_reviews') }}">Home</a></li>
           <li><a href="#">Manage Reviews</a></li>
-          <li><a href="#">Profile</a></li>
+          <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
           <li><a href="{{ url_for('sign_in') }}">Sign In</a></li>
           <li><a href="#">Sign Out</a></li>
           <li><a href="{{ url_for('sign_up') }}">Sign up</a></li>
@@ -39,7 +39,7 @@
       <li><a href="{{ url_for('get_reviews') }}">Home</a></li>
       <li><a href="#">Reviews</a></li>
       <li><a href="#">Manage Reviews</a></li>
-      <li><a href="#">Profile</a></li>
+      <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
       <li><a href="{{ url_for('sign_in') }}">Sign In</a></li>
       <li><a href="#">Sign Out</a></li>
       <li><a href="{{ url_for('sign_up') }}">Sign Up</a></li>
@@ -52,7 +52,7 @@
         {% if messages %}
             {% for message in messages %}
                 <div class="row flashes">
-                    <h4 class="light-blue lighten-4 center-align">{{ message }}</h4>
+                    <h4 class=" grey lighten-4 center-align">{{ message }}</h4>
                 </div>
             {% endfor %}
         {% endif %}
