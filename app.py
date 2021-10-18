@@ -100,6 +100,11 @@ def sign_out():
     return redirect(url_for("sign_in"))
 
 
+@app.route("/add_review")
+def add_review():
+    return render_template("add_review.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

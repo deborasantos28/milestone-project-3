@@ -1,14 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-    {% for review in reviews %}
-        {{ review.genre_type }}<br>
-        {{ review.game_reviewed }}<br>
-        {{ review.review_description }}<br>
-        {{ is_new }}<br>
-        {{ review.review_post_date }}<br>
-    {% endfor %}
-
     <ul class="collapsible popout">
       {% for review in reviews %}
         <li>
