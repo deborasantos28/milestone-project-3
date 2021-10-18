@@ -5,21 +5,26 @@
         {{ review.genre_type }}<br>
         {{ review.game_reviewed }}<br>
         {{ review.review_description }}<br>
+        {{ is_new }}<br>
+        {{ review.review_post_date }}<br>
     {% endfor %}
 
     <ul class="collapsible popout">
+      {% for review in reviews %}
         <li>
-          <div class="collapsible-header white-text deep-orange darken-4 text-shadow"><i class="fas fa-hand-point-down"></i>First</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          <div class="collapsible-header white-text deep-orange darken-4 text-shadow">
+            <i class="fas fa-hand-point-down"></i>
+            <strong>{{ review.game_reviewed }}</strong> : {{ review.review_post_date }}
+            {% if review.is_new == "on" %}
+            <i class="fas fa-comment"></i>
+            {% endif %}
+          </div>
+          <div class="collapsible-body">
+           <strong>{{ review.genre_type }}</strong>
+           <p> {{ review.review_description }}</p>
+          </div>
         </li>
-        <li>
-          <div class="collapsible-header white-text deep-orange darken-4 text-shadow"><i class="fas fa-hand-point-down"></i>Second</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-          <div class="collapsible-header white-text deep-orange darken-4 text-shadow"><i class="fas fa-hand-point-down"></i>Third</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
+        {% endfor %}
       </ul>
 
   {% endblock %}
