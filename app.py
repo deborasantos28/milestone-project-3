@@ -143,6 +143,13 @@ def delete_review(review_id):
     return redirect(url_for("get_reviews"))
 
 
+@app.route("/add_genres")
+def add_genres():
+    genres = list(mongo.db.genres.find().sort("genre_type", 1))
+    return render_template("genres.html", genres=genres)
+
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
