@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="deep-orange-text text-darken-4 center-align">Edit Review</h3>
+
+<div class="row card-panel grey lighten-5">
+    <form class="col s12" method="POST" action="{{ url_for('edit_review', review_id=review._id) }}">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-folder-open prefix deep-orange-text text-darken-4"></i>
+                <select id="genre_type" name="genre_type" class="validate" required>
+                    <option value="" disabled selected>Choose Genre</option>
+                    {% for genre in genres %}
+                    <option value="{{ genre.genre_type }}">{{ genre.genre_type }}</option>
+                {% endfor %}
+                </select>
+                <label for="genre_type">Game Genres</label>
+        </div>
+            </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-gamepad prefix deep-orange-text text-darken-4"></i>
+                <input id="game_reviewed" name="game_reviewed" minlength="1" maxlength="50" 
+                type="text" class="validate" required>
+                <label for="game_reviewed">Please insert the name of the game here</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-pencil-alt prefix deep-orange-text text-darken-4"></i>
+                <textarea id="review_description" name="review_description" minlength="20" maxlength="500" 
+                class="materialize-textarea"></textarea>
+                <label for="review_description">Please write your review here</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="fas fa-calendar-alt prefix deep-orange-text text-darken-4"></i>
+                <input id="review_post_date" name="review_post_date" type="text" class="datepicker validate" required>
+                <label for="review_post_date">Review posted on:</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <button type="submit" class="btn-large deep-orange darken-1 text-shadow">
+                    Edit Review <i class="fas fa-edit"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}
