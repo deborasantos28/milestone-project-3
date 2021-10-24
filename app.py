@@ -149,6 +149,18 @@ def add_genres():
     return render_template("genres.html", genres=genres)
 
 
+@app.route("/add_genre", methods=["GET", "POST"])
+def add_genre():
+    if request.method == "POST":
+        genre = {
+            "genre_type": request.form.get("genre_type")
+        }
+        mongo.db.genres.insert_one(genre)
+        flash("New Game Genre Added")
+        return redirect(url_for("add_genres"))
+
+    return render_template("add_genre.html")
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
