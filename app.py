@@ -21,12 +21,23 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_reviews")
 def get_reviews():
+    """
+    This function allows the user to retrieve the reviews from the db and render it
+    into the the respective html file
+    """
     reviews = list(mongo.db.reviews.find())
     return render_template("reviews.html", reviews=reviews)
     
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    """
+    This function enables the functionality of the search bar provided
+    on the reviews main page. 
+    It searches for the key words within the db and retrives all the results 
+    with the correspondent keys onto the html template. 
+    """
+    # enables search for reviews within the db
     query = request.form.get("query")
     reviews = list(mongo.db.reviews.find({"$text": {"$search": query}}))
     return render_template("reviews.html", reviews=reviews)
@@ -34,6 +45,16 @@ def search():
 
 @app.route("/sign_up", methods=["GET", "POST"])
 def sign_up():
+    """
+    This function is used for registration process.
+    First, it checks if the username is already in use in db.
+    If so, it will display a message telling the new user that this particular
+    user name already exists, and if not the new user will register successfully
+    and will be added to the db.
+
+    The new user is also put into a 'session' cookie whenever logged in. 
+    When logged out, the user 'session' cookie will end as well until logged in again.
+    """
     if request.method == "POST":
         # check if username already exists in db
         existing_user = mongo.db.users.find_one(
@@ -55,6 +76,7 @@ def sign_up():
         return redirect(url_for("profile", username=session["user"]))
 
     return render_template("sign_up.html")
+
 
 
 @app.route("/sign_in", methods=["GET", "POST"])
@@ -86,15 +108,10 @@ def sign_in():
     return render_template("sign_in.html")
 
 
-@app.route("/profile/<username>", methods=["GET", "POST"])
-def profile(username):
-    # grab the session user's username from db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    return render_template("profile.html", username=username)
-
+@app.route("/profile/", methods=["GET", "POST"])
+def profile():
     if session["user"]:
-        return render_template("profile.html", username=username)
+        return render_template("profile.html", username=session["user"])
 
     return redirect(url_for("sign_in"))
 
@@ -125,10 +142,22 @@ def add_review():
     return render_template("add_review.html", genres=genres)
 
 
+@app.route("/review/<review_id>", methods=["GET", "POST"])
+def review_detail(review_id):
+    review = mongo.db.reviews.find_one_or_404({"_id": ObjectId(review_id)})
+    genres = mongo.db.genres.find().sort("genre_type", 1)
+    return render_template("review_detail.html", review=review, genres=genres)
+
+
 @app.route("/edit_review/<review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
+    if 'user' not in session:
+        return redirect(url_for('sign_in'))
+    review = mongo.db.reviews.find_one_or_404(
+        {"_id": ObjectId(review_id), "created_by": session["user"]}
+    )
     if request.method == "POST":
-        submit = {
+        submit = {  
             "genre_type": request.form.get("genre_type"),
             "game_reviewed": request.form.get("game_reviewed"),
             "review_description": request.form.get("review_description"),
@@ -138,18 +167,20 @@ def edit_review(review_id):
         mongo.db.reviews.update({"_id": ObjectId(review_id)}, submit)
         flash("Review Updated Successfully")
 
-    review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
     genres = mongo.db.genres.find().sort("genre_type", 1)
     return render_template("edit_review.html", review=review, genres=genres)
 
 
 @app.route("/delete_review/<review_id>")
 def delete_review(review_id):
-    mongo.db.reviews.remove({"_id": ObjectId(review_id)})
-    flash("Review Deleted Successfully")
+    review = mongo.db.review.find_one(
+        {"_id": ObjectId(review_id)})
+    if review['created_by'] == session["user"]:
+        mongo.db.reviews.remove({"_id": ObjectId(review_id)})
+        flash("Review Deleted Successfully")
     return redirect(url_for("get_reviews"))
 
-
+    
 @app.route("/add_genres")
 def add_genres():
     genres = list(mongo.db.genres.find().sort("genre_type", 1))
@@ -188,7 +219,6 @@ def delete_genre(genre_id):
     mongo.db.genres.remove({"_id": ObjectId(genre_id)})
     flash("Genre Successfully Deleted")
     return redirect(url_for("add_genres"))
-
 
 
 if __name__ == "__main__":
