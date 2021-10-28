@@ -3,6 +3,7 @@ body {
     min-height: 100vh;
     flex-direction: column;
     font-family: "Roboto Condensed", sans-serif;
+    background-color:  #E0E1E4; 
   }
 
   main {
@@ -52,3 +53,4 @@ body {
 .page-footer{
     padding: 5px;
 }
+

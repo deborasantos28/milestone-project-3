@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="deep-orange-text text-darken-4 center-align">{{ review.game_reviewed }}</h3>
+<!-- Single review Display-->
+<h3 class="black-text text-shadow text-darken-4 center-align">{{ review.game_reviewed }}</h3>
 
     <ul>
       <div class="row center">
         <div class="col s12 m8 offset-m2">
           <div class="card shadow center-align deep-orange darken-4">
-            <div class="card-content white-text">
+            <div class="card-content black-text">
               <span class="card-title"> <strong>{{ review.game_reviewed }}</strong> : {{ review.review_post_date }}</span>
               <strong>{{ review.genre_type }}</strong>
               <p> {{ review.review_description }}</p>

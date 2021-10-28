@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="deep-orange-text text-darken-4 center-align">Edit Review</h3>
+<h3 class="black-text text-shadowtext-darken-4 center-align">Edit Review</h3>
 
+<!--Edit Form with the data retrieved from the MongoDB -->
 <div class="row card-panel grey lighten-5">
     <form class="col s12" method="POST" action="{{ url_for('edit_review', review_id=review._id) }}">
         <div class="row">
