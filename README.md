@@ -87,6 +87,54 @@
  * The Profile page which consists of:
     * A simple display information with the logged in user name
 
+### MongoDB - Setting up and using a Database
+
+  1. Register for a free account with MongoDB
+  2. Create a new Cluster or if already and existing user create a shared Cluster
+  3. Select a Cloud provider and the region that's closest to you
+  4. Give your cluster a name 
+  5. Go to collections and click the button "Create a Database"
+  6. When prompted name your database and collections
+  7. Go to the database access and add a username and password
+
+* Connecting the project to the DB
+
+1. Click on the cluster overview on the tab underneath your cluster name
+2. Click on the connect button. Usually situated on the right side
+3. Select 'connect your application' when prompted
+4. Choose your language and driver (For this project I used Python 3.6 or later)
+5. Copy the connection string and change the details.
+6. Set the cluster name, collection name, URI connection string and password as environmental
+
+* Projects' MongoDB Diagram
+<img src="assets/images/MongoDB diagram.png">
+  * This diagram displays the general structure of my MongoDB set up. 
+
+* Diagram description:
+  * I used my existing cloud within MongoDB from previous projects with Code Institute
+  * My database is called lock_and_load_reviews and it has a set of 3 collections within it: 
+    1. Genres
+    2. Reviews
+    3. users
+  * Within the genres collection exists: 
+    1. _id:Object
+    2. genre_type;
+  * Within the reviews collection exists: 
+    1. _id:Object 
+    2. genre_type 
+    3. game_reviewed 
+    4. review_description 
+    5. review_post_date 
+    6. created_by
+  * Within the users collection exists:
+    1. username
+    2. password
+
+* How it all connects:
+  * On the webpage, everytime a user signs up, it stores their data in the "username" and "password" in the _users collection_.
+  * This user will eventually want to create a review on the page following the form, and this is where the _reviews collection_ comes into action. Every field the user fills on the form it passes on the data to the DB filling in all the parameters on the _reviews collection_. <br> One of the values is shared by the _users collection_ and _the reviews_ collection and that is the _created_by_. <br> When posting a review the id for who created the posted will be collected from the _users collection_. 
+  * The _reviews collection_ also shares on of it's stored values with the _genres collection_ which is the genre_type. <br>
+  On the page a game genre selection is available by a dropdown menu, the parameteres stored in the dropdown menu are provided by the database on MongoDB. <br> To be able to retrieve this values from one collection to the other, we pass on the field value from one collection and place it in the other. In this case I've taken the genre_type field and passed it onto the reviews collection as well.
 # Skeleton 
 
 ## Layout
@@ -203,6 +251,10 @@
   on the website.
   * It also contains the links to biggest gaming console websites, which will open in a separate tab.
 
+* Typography for this project
+  * I decided to use [Google Fonts](https://fonts.google.com/), as it is reliable and the safest font source. <br> I have used the Fonts _Bangers_ and _Roboto Condensed_ for my project as I thought they fit in quite well with the theme of the website.
+
+
 ## Features Left to implement
 * Game Database retrieval API for when adding the game intended to review
 * A background video for the main page
@@ -210,30 +262,46 @@
 
 # Technologies Used
 
-* This project was developed using:
-    * HTML, CSS, JavaScript
-    * Python, Flask, JQuery
-    * MongoDB 
-    * Materialize 
-* The project was developed using Gitpod as the IDE.
-* This project uses GitHub and Heroku for Storing and Deployment.
+* Technologies and Frameworks used:
+    * HTML5 
+    * CSS3
+    * JavaScript
+    * Python 
+    * JQuery
+    * Flask Framework + Extensions
+    * [Materialize](https://materializecss.com/color.html)
+    * Git 
+    * GitHub 
+    * Gitpod.io 
+
+  * Front End
+    * [Google Fonts](https://fonts.google.com/)
+    * [Font Awesome](https://fontawesome.com/)
+  
+  * Back End
+    * [MongoDB](https://www.mongodb.com/)
+    * [Heroku](https://www.heroku.com/)
+  
+  * Extras
+    * [Random Key Gen](https://randomkeygen.com/)
+    * [Beautifier](https://beautifier.io/)
+    * [Lucid Software](https://lucid.co/) 
 
 
 # Testing 
 |Test Label  | Test Action | Expected Outcome | Test Outcome |
 |:--|:--|:--|:--:|
-| Navbar | Navigated through all the links in the navbar and clicked on them individually. <br> Created multiple accounts and signed in and out with them. <br> Logged in as an Admin to make sure the Admin functions still work as expected <br> On google development tools, I reduced the screen size to be able to see the side nav, clicked on all the links and signed in and out of the accounts |All the links to be responsive and lead to their respective pages. <br> All the links should display when not logged in, logged in a current user and logged in as an Admin. | PASS 
-| Home | Opened and closed the collapsible menu options <br> Tested with multiple accounts that the review is logged with the different usernames and to be able to see if the edit and delete buttons are only visible to the user which has created them. <br> When opening the accordion, checked for any white spaces. <br> Clicked on the Edit and Delete buttons <br> Clicked on the view button. | The collapsible menu should extend fully without any problems or white spaces. <br> The Edit and Delete buttons should only be visible to the user which has created the review. <br> The Edit button should open the Edit Review page. <br>The view button should be visible to all users even if not a registered user. Also the View button should open a single view page of the whole review <br> | PASS 
+| Navbar | Navigated through all the links in the navbar and clicked on them individually. <br> Created multiple accounts and signed in and out with them. <br> Logged in as an Admin to make sure the Admin functions still work as expected <br> On google development tools, I reduced the screen size to be able to see the side nav, clicked on all the links and signed in and out of the accounts | All the links to be responsive and lead to their respective pages. <br> All the links should display when not logged in, logged in a current user and logged in as an Admin. | PASS 
+| Search bar | Searched for specific key values with the database and checked if it retrieved the values searched. <br> Searched for key values that didn't exist. <br> Checked if the search bar is visible and operational for all users, even without an account or not logged in. <br> | When searching for a certain game or genre, the correct key value should display.
+| Home | Opened and closed the collapsible menu options <br> Tested with multiple accounts that the review is logged with the different usernames and to be able to see if the edit and delete buttons are only visible to the user which has created them. <br> When opening the accordion, checked for any white spaces. <br> Clicked on the Edit and Delete buttons <br> Clicked on the view button. <br> | The collapsible menu should extend fully without any problems or white spaces. <br> The Edit and Delete buttons should only be visible to the user which has created the review. <br> The Edit button should open the Edit Review page. <br>The view button should be visible to all users even if not a registered user. Also the View button should open a single view page of the whole review <br> | PASS 
 |Edit Review | Pressed the Edit button on the Home page which will lead to the Edit review page. <br> Checked that the values in each field are prefilled with the existing data pulled from MongoDB database collections <br> Copied the path url and open in an incognito tab and changed the name of the user. <br> Updated all the fields with new data. <br> Clicked the cancel button. | The Edit button should redirect the user to the Edit Review. <br> When editing the Review, the old values in each field should be visible, and retrieved from the database. <br> No other user should be able to Edit or Delete another users review, even when trying to change the name on the url. The user should be then redirected to the sign in page. <br> The cancel button should cancel the user action if not ready to commit. | PASS
 |New Review | Checked the dropdown menu extends and retrieves all the genres stored in the database. <br> Created a different review for all genres. <br> Didn't fill in the fields to check for validation and required attribute, a red validation line should appear underneath the empty field <br> Left all fields blank and tried to submit the review. <br> Submitted the review and checked for comfirmation that has been successful by the flash message, checking on the main page and checking the database| The dropdown menu should function smoothly and show all the genres stored on MongoDB genres collection. <br> When the fields are left blank a red line underlining that field should appear, signifing that it needs to be filled in. <br> When trying to submit without one or all fields completed the required attribute should take action by showing a "fill in required field" message. <br> A comfirmation flash message should display when the review has been submitted successfully | PASS |
 | New Genre / Edit genre| By logging in with a regular account, checked that the New Genres does not show on the navbar for any other users apart from the Admin. <br> Pressed the Edit and Delete button. <br> Checked that the Genres cards display in a list alphabetical order. <br> | The New Genre option should only be seen and available to the Admin account. <br> The Edit button should direct the Admin to the edit genre page. <br> In the edit page, I changed the genre to a new one and saved the file. <br> in the Edit page the cancel button was pressed. <br> The delete button should delete the genre, from the page and database. <br> The cards should display in an alphabetical order list. <br> The Edit page should allow the user to change the genre and update it on the page and database. <br> The cancel button should allow the user to cancel any changes made before commiting. | PASS |
 | Add a new genre| Left the field blank and tried clicking the add genre buttton. <br> When added a new Genre, checked if it was present on the page and on the database. <br> | The add genre option should only be seen and available to the Admin account. <br> Nothing should be added if the field is left blank. | PASS |
 |Sign In | Signed in with one of my existing accounts and opened developer tools on the page, navigated to the application tab and checked on the cookies tab if when logged in the user is added as in session and if it's taken off session when logged out. <br> Clicked inside both username and password fields and then outside of the form. <br> Filled in one field and not the other. <br> Tried signing in without having an account. <br> Clicked the link at the bottom for the create an account. <br> Tried signing in with someone elses name. <br> | The required attribute should display a message when either one or both input fields are not filled in, and a red underline should appear underneath the field to show that it needs validation. <br> If trying to sign in without an account, or by filling the fields incorrectly, a message should display alerting the user that it's the incorrect information. <br> The link at the bottom of the page should direct the new user to registration page. <br> When logged in the user should be in session and when logged out it should be taken off session. | PASS |
 |Sign Up | Clicked inside both username and password fields and then outside of the form. <br> Filled in one field and not the other. <br> Tried signing up with less than the minimum required characters, and more than the max amount of characters <br> Clicked the link at the bottom of the page. <br> Tried signing up with and existing name. <br> | The required attribute should display a message when either one or both input fields are not filled in, and a red underline should appear underneath the field to show that it needs validation. <br> If trying to sign up to an account with less or more than the required amount of characters, should resuld in a "Please match the format requested" message. <br> The link at the bottom of the page should redirect an already existing user to the sign in page. | PASS |
-| Search bar | Searched for specific key values with the database and checked if it retrieved the values searched. <br> Searched for key values that didn't exist. <br> Checked if the search bar is visible and operational for all users, even without an account or not logged in. <br> | When searching for a certain game or genre, the correct key value should display.
-The search bar should be available for all users to use, even without being a registered user of the platform. | PASS |
 | Footer | Tried the footer on different screen sizes. <br> Clicked on each social link individually and checked that they open on an external tab. <br> | When viewed in different size screens the footer should not move from the bottom. <br> The social links should open in an external tab. | PASS |
-## Validator Testing
+## Validators 
 * CSS
   * No errors were found when testing on the official [Jigsaw validator](https://jigsaw.w3.org/css-validator/)
 
@@ -241,12 +309,16 @@ The search bar should be available for all users to use, even without being a re
 
   * No errors were found when testing on the official [W3C Validator](https://validator.w3.org/)
 
+* Python 
+  * This code is Pep8 compliant but "Trailing whitespace" warning shows [Pep8 Online](http://pep8online.com/)
+
 ## Browser Compatibility 
  * This website has been tested and verified to work on various browsers such as : Chrome, Firefox and Edge.
 
 ## Responsiveness
  * This website has been tested on small, medium and large screens. 
  * When it comes to Xs screens the website has only been tested in the responsive setting on Google Developer tools. 
+ * [Am I Responsive](http://ami.responsivedesign.is/)
 
 # Deployment 
 
@@ -272,14 +344,16 @@ The search bar should be available for all users to use, even without being a re
   12. Once the application has been deployed you will be able to view the app
   13. For an easier future deployments, set the app to automatically deploy every time you push to the repository by enabling the Automatic deploys.
 
+* This project uses [GitHub](http://github.com/) for Storing Repositories.
 * To see my Live project on Heroku [Click here!](https://ms3-lock-and-load-reviews.herokuapp.com/)
 
 * For my GitHub Repo [Click here!](https://github.com/deborasantos28/ms3-lock-and-load-reviews)
 # User Stories
 | User Story | Acceptance Criteria |
 |--|--| 
-| As a member of the LGBTQ+ and a user of this website I would like to know more about this charity.| * Scroll down to the end of the page. <br /> * On the left corner of the footer access the contact details and Address <br /> * Alternatively, contact us directly on social medias and discord chat |
-As member of the community and music enthusiast, I would like to be a part of this charity activities. | * On top of the page, navigate throught the menu <br /> * Click on the Join-us option on the menu <br /> * Fill in the required fields on the provided form <br /> * The form and the reasons for wanting to join the charity will be reviewed | 
+| As a gamer I am interested in reading more about games before I buy them.| * Register with us <br /> * Once the user has an account, access the home page to read all reviews <br /> * Alternatively use the search bar to search for specific reviews of a specific product |
+As full time game tester I want to give my honest opinion about most of the games I have tested and played. | * After signing in with us, navigate through the navbar and click New Review <br /> * Fill out the new review form, preferably without any foul language. <br /> * Once the form is completed and the user is happy with review, simply press the Submit button. | 
+| As a casual gamer I am interested in learning more about games.| * On the main page accessible to all users, read the reviews about the different genres of games <br /> * Alternatively, navigate down the page to the footer <br /> * Click on any of the available links to the Gaming industries websites, or click on the Twitch Icon to be able to see games played in real time by other gamers.|
 
 # Credits
 
@@ -298,9 +372,13 @@ As member of the community and music enthusiast, I would like to be a part of th
 ## Contents
 
 ## Resources 
-* Colour Palette and Resource for Code
+* Colour Palette
   
   * [Materialize](https://materializecss.com/color.html)
+
+* Diagram drawing
+  
+  * [Lucid Software](https://lucid.co/) 
 
 
 

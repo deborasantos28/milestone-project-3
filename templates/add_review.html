@@ -13,24 +13,24 @@
                     <option value="" disabled selected>Choose Genre</option>
                     {% for genre in genres %}
                     <option value="{{ genre.genre_type }}">{{ genre.genre_type }}</option>
-                {% endfor %}
+                    {% endfor %}
                 </select>
                 <label for="genre_type">Game Genres</label>
-        </div>
             </div>
+        </div>
         <div class="row">
             <div class="input-field col s12">
                 <i class="fas fa-gamepad prefix deep-orange-text text-darken-4"></i>
-                <input id="game_reviewed" name="game_reviewed" minlength="1" maxlength="50" 
-                type="text" class="validate" required>
+                <input id="game_reviewed" name="game_reviewed" minlength="1" maxlength="50" type="text" class="validate"
+                    required>
                 <label for="game_reviewed">Please insert the name of the game here</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
                 <i class="fas fa-pencil-alt prefix deep-orange-text text-darken-4"></i>
-                <textarea id="review_description" name="review_description" minlength="20" maxlength="500" 
-                class="materialize-textarea"></textarea>
+                <textarea id="review_description" name="review_description" minlength="20" maxlength="500"
+                    class="materialize-textarea"></textarea>
                 <label for="review_description">Please write your review here</label>
             </div>
         </div>

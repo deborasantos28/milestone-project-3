@@ -21,7 +21,8 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_reviews")
 def get_reviews():
-    """ Renders the the home page and displays the collection of all the reviews
+    """
+     Renders the the home page and displays the collection of all the reviews
     from the database 
     """
     reviews = list(mongo.db.reviews.find())
@@ -31,7 +32,8 @@ def get_reviews():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     """
-    Enables search for reviews within the db, returns the value and renders the page
+    Enables search for reviews within the db, returns the value and renders the 
+    page
     """
     query = request.form.get("query")
     reviews = list(mongo.db.reviews.find({"$text": {"$search": query}}))
@@ -41,10 +43,10 @@ def search():
 @app.route("/sign_up", methods=["GET", "POST"])
 def sign_up():
     """
-    This function checks if username already exists in db. 
+    This function checks if username already exists in db.
     Is used for registration process.
     It checks if the username is already in use in db.
-    The new user is also put into a 'session' cookie whenever logged in. 
+    The new user is also put into a 'session' cookie whenever logged in.
     When logged out, the user 'session' cookie will be deleted
     until logged in again
     """
@@ -273,4 +275,4 @@ def delete_genre(genre_id):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)
