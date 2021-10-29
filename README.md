@@ -1,5 +1,7 @@
 <h1 align="center">Welcome to Lock & Load Reviews</h1>
 
+<img src="assets/images/Am I responsive.png">
+
 # About
 
 ### Lock & Load is a games review website, that allows users to review new and old games, and display them on a common platform.
@@ -228,7 +230,7 @@
 | Add a new genre| Left the field blank and tried clicking the add genre buttton. <br> When added a new Genre, checked if it was present on the page and on the database. <br> | The add genre option should only be seen and available to the Admin account. <br> Nothing should be added if the field is left blank. | PASS |
 |Sign In | Signed in with one of my existing accounts and opened developer tools on the page, navigated to the application tab and checked on the cookies tab if when logged in the user is added as in session and if it's taken off session when logged out. <br> Clicked inside both username and password fields and then outside of the form. <br> Filled in one field and not the other. <br> Tried signing in without having an account. <br> Clicked the link at the bottom for the create an account. <br> Tried signing in with someone elses name. <br> | The required attribute should display a message when either one or both input fields are not filled in, and a red underline should appear underneath the field to show that it needs validation. <br> If trying to sign in without an account, or by filling the fields incorrectly, a message should display alerting the user that it's the incorrect information. <br> The link at the bottom of the page should direct the new user to registration page. <br> When logged in the user should be in session and when logged out it should be taken off session. | PASS |
 |Sign Up | Clicked inside both username and password fields and then outside of the form. <br> Filled in one field and not the other. <br> Tried signing up with less than the minimum required characters, and more than the max amount of characters <br> Clicked the link at the bottom of the page. <br> Tried signing up with and existing name. <br> | The required attribute should display a message when either one or both input fields are not filled in, and a red underline should appear underneath the field to show that it needs validation. <br> If trying to sign up to an account with less or more than the required amount of characters, should resuld in a "Please match the format requested" message. <br> The link at the bottom of the page should redirect an already existing user to the sign in page. | PASS |
-| Search bar | Searched for specific key values with the database and checked if it retrieved the values searched. <br> Searched for key values that didn't exist. <br> Checked if the search bar is visible and operational for all users, even without an account or not logged in. <br> | When searching for a certain game or genre, the correct key value should display. <br>
+| Search bar | Searched for specific key values with the database and checked if it retrieved the values searched. <br> Searched for key values that didn't exist. <br> Checked if the search bar is visible and operational for all users, even without an account or not logged in. <br> | When searching for a certain game or genre, the correct key value should display.
 The search bar should be available for all users to use, even without being a registered user of the platform. | PASS |
 | Footer | Tried the footer on different screen sizes. <br> Clicked on each social link individually and checked that they open on an external tab. <br> | When viewed in different size screens the footer should not move from the bottom. <br> The social links should open in an external tab. | PASS |
 ## Validator Testing
@@ -248,22 +250,31 @@ The search bar should be available for all users to use, even without being a re
 
 # Deployment 
 
-* The website was deployed to GitHub pages.
-The steps taken were the following:
-  
-  1. On the prefered Internet Browser, access [Google](https://www.google.com/)
-  2. On [Google](https://www.google.com/), type in Github to access the [Github](https://github.com/) page
-  3. When accessing [Github](https://github.com/) create an account following the provided steps
-  4. After creating an account and profile, create a new/first repository by clicking on "New"
-  5. With the new repository now in place the project can now be started
-  6. After the project is concluded it is ready for deployment 
-  7. For deployment access the settings on the GitHub repository
-  8. On the left hand side menu, navigate and select the Master Branch.
-  9. Once the master branch is selected, the page will automatically refresh and display a message for the successful deployment.
+* Requirements needed for deployment:
 
-* For GitHub page live link [Click here!](https://deborasantos28.github.io/milestone-project-1/)
-Need to include user stories 
+    * MongoDB Account
+    * Heroku Account
+    * GitHub Account
 
+* Deploying to Heroku:
+
+  1. Create an account with Heroku
+  2. Once registered and logged in click the create new app button
+  3. Once prompted select the region closest to you and give the app a name  
+  4. Within the options given select and set your deployment method to 'GitHub'
+  5. Connect to GitHub and login
+  6. Search for the repository you wish to deploy from
+  7. You will need to head to settings and click 'Config Vars'
+  8. You will now need to set up your Configuration Vars the same way as you did for your env.py
+  9. Your Procfile and your requirements.txt should be fully updated prior to deployment
+  10. Click the deploy tab and navigate to manual deploy
+  11. Select which branch you wish to deploy from and deploy the application
+  12. Once the application has been deployed you will be able to view the app
+  13. For an easier future deployments, set the app to automatically deploy every time you push to the repository by enabling the Automatic deploys.
+
+* To see my Live project on Heroku [Click here!](https://ms3-lock-and-load-reviews.herokuapp.com/)
+
+* For my GitHub Repo [Click here!](https://github.com/deborasantos28/ms3-lock-and-load-reviews)
 # User Stories
 | User Story | Acceptance Criteria |
 |--|--| 
@@ -272,24 +283,22 @@ As member of the community and music enthusiast, I would like to be a part of th
 
 # Credits
 
-* For the Gallery I used the code from [MDB Bootstrap Static Gallery](https://mdbootstrap.com/docs/standard/extended/gallery/#section-lightbox) for a responsive and simple layout. A few alterations were made to the code along with the customized CSS. 
+* Tutors at Code Institute. A huge thank you to them for helping me with any doubts or questions I had. 
 
-* For the Media Queries I used the W3Schools example provided. 
+* Student Care at Code Institute. A big thank you for always checking up on me and how I am doing.
 
-* This project was made by using some of Bootstraps code.
+* A huge Thank You to my mentor Brian Macharia for always helping me with the best tips and solutions for my projects, and always make time for me whenever I am in need of assistance.
+
+* This project was made following the example of Code Institutes' "Task Manager" project.
+
+* I've taken some inspiration from crypticCaroline README.md. 
 
 * A huge thank you to my family and friends for testing the website and give me feedback that was so valuable when making this project.
 
 ## Contents
 
 ## Resources 
-* Images
-  * [Rawpixel](https://www.rawpixel.com) 
-  * [Unsplash](https://unsplash.com/)
-  * [Pexels](https://www.pexels.com/)
-  * [Pixabay](https://pixabay.com/)
-
-* Colour Palette
+* Colour Palette and Resource for Code
   
   * [Materialize](https://materializecss.com/color.html)
 
